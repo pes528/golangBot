@@ -25,15 +25,16 @@ installAndroid(){
 }
 
 installLinux(){
-    apt update -y 
+    sudo apt update -y 
 
     clear
     echo -e "${verde}   Instalando golang.... ${fin}"
     sleep 3
     sudo wget https://go.dev/dl/go1.21.3.linux-amd64.tar.gz
-    sudo rm -rf /usr/local/go && tar -C /usr/local -xzf go1.21.3.linux-amd64.tar.gz
+    #sudo rm -rf /usr/local/go && tar -C /usr/local -xzf go1.21.3.linux-amd64.tar.gz
+    sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.21.3.linux-amd64.tar.gz
     export PATH=$PATH:/usr/local/go/bin
-    rm go1.21.3.linux-amd64.tar.gz
+    sudo rm -rf go1.21.3.linux-amd64.tar.gz
     echo -e "${verde}    Finalizado ${fin}"
     sleep 3
     echo -e "    Instalando ytdlp"
@@ -86,4 +87,3 @@ elif [ $OsSystem == "GNU/Linux" ];then
 else
     echo "No se reconoce sistema"
 fi
-
