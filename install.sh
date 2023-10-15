@@ -5,10 +5,11 @@
 
 
 OsSystem=$(uname -o)
-devNull = "/dev/null 2>&1"
+
 installAndroid(){
     apt update && apt upgrade -y 
     apt install curl -y
+    apt install golang -y
     apt install git -y 
     apt install python -y 
     pip install yt-dlp -y 
@@ -59,7 +60,8 @@ configLinux(){
     clear
     sleep 3
     echo "Configuracion exitosa....dirijase a la carpeta golangBot y escriba 'go run bot.go' para iniciar el programa " 
-    rm $var/insall.sh
+    rm $var/install.sh
+    rm install.sh
     else
     clear
     sleep 3
