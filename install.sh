@@ -63,11 +63,11 @@ configLinux(){
     cd ..
     clear
     sleep 3
-    echo -e "${verde}Configuracion exitosa....dirijase a la carpeta golangBot y escriba 'go run bot.go' para iniciar el programa ${fin}" 
+    echo -e "\n${verde}Configuracion exitosa....dirijase a la carpeta golangBot y escriba 'go run bot.go' para iniciar el programa ${fin}" 
     rm $var/install.sh
     rm install.sh
-    echo -e "${verde}Iniciando ..${fin}"
-    go run $var/bot.go
+    echo -e "\n${verde}Iniciando ..${fin}\nPara detener el pulse las teclas ctrl+c"
+    cd golangBot && go run bot.go
     else
     clear
     sleep 3
