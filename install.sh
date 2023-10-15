@@ -3,11 +3,15 @@
 # Telegram bot para la descarga de videos desde la red social tiktok 
 # creado por : telegram @pes528
 
-
+verde="\033[1;32m"
+fin="\033[0m"
 OsSystem=$(uname -o)
 
 installAndroid(){
     apt update && apt upgrade -y 
+    clear
+    echo -e "${verde}Instalando dependencias...${fin}\n"
+    sleep 3
     apt install curl -y
     apt install golang -y
     apt install git -y 
@@ -24,13 +28,13 @@ installLinux(){
     apt update -y 
 
     clear
-    echo -e "   Instalando golang...."
+    echo -e "${verde}   Instalando golang.... ${fin}"
     sleep 3
     sudo wget https://go.dev/dl/go1.21.3.linux-amd64.tar.gz
     sudo rm -rf /usr/local/go && tar -C /usr/local -xzf go1.21.3.linux-amd64.tar.gz
     export PATH=$PATH:/usr/local/go/bin
     rm go1.21.3.linux-amd64.tar.gz
-    echo -e "    Finalizado"
+    echo -e "${verde}    Finalizado ${fin}"
     sleep 3
     echo -e "    Instalando ytdlp"
     sleep 2
@@ -45,13 +49,13 @@ installLinux(){
 configLinux(){
     var="golangBot"
     clear
-    echo -e "\nA continuacion copia el token de tu bot y tu nombre de usuario de telegram\n"
+    echo -e "${verde}\nA continuacion copia el token de tu bot y tu nombre de usuario de telegram${fin}\n"
     read -p "Token: " token 
     read -p "Tu nombre de usuario: " user
     datos=$(curl -i -s https://api.telegram.org/bot$token/getMe | grep -o 200)
     
     if [[ $datos -eq 200 ]];then
-    echo " Datos correctos"
+    echo -e "${verde} Datos correctos ${fin}"
 
     echo -e "TOKEN:$token" > $var/.env
     echo -e "USER:$user" >> $var/.env
@@ -59,9 +63,11 @@ configLinux(){
     cd ..
     clear
     sleep 3
-    echo "Configuracion exitosa....dirijase a la carpeta golangBot y escriba 'go run bot.go' para iniciar el programa " 
+    echo -e "${verde}Configuracion exitosa....dirijase a la carpeta golangBot y escriba 'go run bot.go' para iniciar el programa ${fin}" 
     rm $var/install.sh
     rm install.sh
+    echo -e "${verde}Iniciando ..${fin}"
+    go run $var/bot.go
     else
     clear
     sleep 3

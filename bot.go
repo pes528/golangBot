@@ -38,7 +38,7 @@ func main() {
 
 	b.RegisterHandler(bot.HandlerTypeMessageText, "/start", bot.MatchTypeExact, start)
 	fmt.Println()
-	fmt.Println("				BOT RUNNING.......")
+	fmt.Println("		BOT RUNNING.......")
 	b.Start(ctx)
 }
 
