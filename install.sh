@@ -13,16 +13,18 @@ installAndroid(){
     echo -e "${verde}Instalando dependencias...${fin}\n"
     sleep 3
     apt install curl -y
-    echo -e "${verde}Instalando golang..${fin}"
+    echo -e "${verde}Instalando golang...${fin}"
     apt install golang -y
     apt install git -y 
-    echo -e "${verde}Instalando pytho..${fin}"
+    clear
+    echo -e "${verde}Instalando python...${fin}"
     apt install python -y 
-    echo -e "${verde}Instalando yt-dlp.${fin}"
+    clear
+    echo -e "${verde}Instalando yt-dlp...${fin}"
     pip install yt-dlp 
     
-    echo -e "${verde}\n\n Instalación finalizada ${fin}"
-    sleep 3
+    echo -e "${verde}\n\nInstalación finalizada ${fin}"
+    sleep 2
     git clone https://github.com/pes528/golangBot
     
     configLinux
