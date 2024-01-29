@@ -67,7 +67,7 @@ configLinux(){
 
     echo -e "TOKEN:$token" > $var/.env
     echo -e "USER:$user" >> $var/.env
-    cd $var && go get github.com/go-telegram/bot && go get github.com/joho/godotenv 
+    cd $var && go get github.com/go-telegram/bot@v0.8.1 && go get github.com/joho/godotenv@v1.5.1
     cd ..
     clear
     sleep 3
