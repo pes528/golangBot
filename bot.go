@@ -8,7 +8,7 @@ import (
 	"os"
 	"os/exec"
 	"os/signal"
-
+	"net/http"
 	"github.com/go-telegram/bot"
 	"github.com/go-telegram/bot/models"
 	"github.com/joho/godotenv"
@@ -19,6 +19,19 @@ Bot de telegram para descargar videos desde tiktok creado por @pes528
 
 */
 func main() {
+	com := os.Args
+	if len(com[0:]) > 1 && com[1] == "config"{
+		fmt.Println("config")
+		config()
+	}else{
+		ini()
+	}
+
+}
+
+
+func ini(){
+	
 	ctx, cancel := signal.NotifyContext(context.Background(), os.Interrupt)
 	defer cancel()
 
@@ -26,7 +39,7 @@ func main() {
 		bot.WithDefaultHandler(handler),
 	}
 	if godotenv.Load() != nil{
-		log.Fatal("Error .env file")
+		log.Fatal("\n\033[1;33m Error archivo .env ejecuta 'go run golangBot config' \033[0m")
 	}
 
 	b, err := bot.New(os.Getenv("TOKEN"), opts...)
@@ -42,11 +55,13 @@ func main() {
 	b.Start(ctx)
 }
 
+
+
 func handler(ctx context.Context, b *bot.Bot, update *models.Update) {
 	fmt.Println(update.Message.Text)
 	fmt.Println(ctx)
 	
-	usuario := os.Getenv("USER")
+	usuario := os.Getenv("USERTELEGRAM")
 	
 	enviado := tiktok(update.Message.Text)
 	//sti := update.Message.Sticker
@@ -132,4 +147,33 @@ func stickerRandom()string{
 	}
 	num := stickers[rand.Intn(len(stickers))]
 	return num
+}
+
+func config(){
+	fmt.Print("\nTOKEN: ")
+	var token string
+	fmt.Scanln(&token)
+	fmt.Print("\nUser: ")
+	var use string 
+	fmt.Scanln(&use)
+
+	pet, err := http.Get("https://api.telegram.org/bot"+token+"/getMe")
+	if err != nil{
+		panic(err)
+	}
+	if pet.StatusCode != 200{
+		log.Fatal("\033[1;31m Datos incorrectos \033[0m")
+	}else{
+
+		file:= os.WriteFile(".env", []byte("TOKEN:"+token+"\nUSERTELEGRAM:"+use+"\n"), 0666)
+		if file != nil{
+			log.Fatal(err)
+		}
+		fmt.Println("CONFIGURACION EXITOSA EJECUTA ./golangBot")
+
+	}
+
+
+
+
 }
