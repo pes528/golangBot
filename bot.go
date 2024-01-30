@@ -169,7 +169,7 @@ func config(){
 		if file != nil{
 			log.Fatal(err)
 		}
-		fmt.Println("CONFIGURACION EXITOSA EJECUTA ./golangBot")
+		fmt.Println("CONFIGURACION EXITOSA EJECUTA 'go run bot.go' para iniciar el programa")
 
 	}
 
